@@ -21,16 +21,8 @@ import br.ucsal.testequalidade.impostos.domain.FichaFinanceira;
 @TestInstance(Lifecycle.PER_CLASS)
 class IrpfBOIntegradoTest {    
 
-    private Funcionario funcionario1;
-    private Funcionario funcionario2;
-    private Funcionario funcionario3;
-    private Funcionario funcionario4;
-    private Funcionario funcionario5;
-    private FichaFinanceira fichaFinanceira1;
-    private FichaFinanceira fichaFinanceira2;
-    private FichaFinanceira fichaFinanceira3;
-    private FichaFinanceira fichaFinanceira4;
-    private FichaFinanceira fichaFinanceira5;
+    private Funcionario funcionario;
+    private FichaFinanceira fichaFinanceira;
     
 	@BeforeAll
     public void setupClass() {
@@ -38,13 +30,13 @@ class IrpfBOIntegradoTest {
 
         FichaFinanceiraBuilder fichaFinanceiraBuilder = FichaFinanceiraBuilder.umaFichaFinanceira();
 
-        funcionario1 = funcionarioBuilder.comMatricula(1).comNome("Lucas").comEmail("lucas@gmail.com").comEndereco("Rua da Ribeira").comDataNascimento(LocalDate.of(2003, 6, 10)).build();
-        fichaFinanceira1 = fichaFinanceiraBuilder.comFuncionario(funcionario1).comMesAnoReferencia(LocalDate.now()).comDataPagamento(LocalDate.now()).comSalarioBruto(new BigDecimal("3598.64")).build();
+        funcionario = funcionarioBuilder.comMatricula(1).comNome("Lucas").comEmail("lucas@gmail.com").comEndereco("Rua da Ribeira").comDataNascimento(LocalDate.of(2003, 6, 10)).build();
+        fichaFinanceira = fichaFinanceiraBuilder.comFuncionario(funcionario).comMesAnoReferencia(LocalDate.now()).comDataPagamento(LocalDate.now()).comSalarioBruto(new BigDecimal("3598.64")).build();
     }
 
     @DisplayName("Testing taxes")
     @Test
     void testarIrpfBO() {
-        assertEquals(184.99, IrpfBO.calcularIr(fichaFinanceira1).doubleValue());
+        assertEquals(184.99, IrpfBO.calcularIr(fichaFinanceira).doubleValue());
     }
 }
